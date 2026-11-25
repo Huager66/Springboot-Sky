@@ -1,0 +1,70 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  datasource:
+    druid:
+#      driver-class-name: ${sky.datasource.driver-class-name}
+#      url: jdbc:mysql://${sky.datasource.host}:${sky.datasource.port}/${sky.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+#      username: ${sky.datasource.username}
+#      password: ${sky.datasource.password}
+      driver-class-name:  com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/sky_take_out?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: root
+      password: 1234
+  redis:
+    host: localhost
+    port: 6379
+
+
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.sky.entity
+  configuration:
+    #开启驼峰命名
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com:
+      sky:
+        mapper: debug
+        service: info
+        controller: info
+
+sky:
+  jwt:
+    # 设置jwt签名加密时使用的秘钥
+    admin-secret-key: itcast
+    # 设置jwt过期时间
+    admin-ttl: 7200000
+    # 设置前端传递过来的令牌名称
+    admin-token-name: token
+    user-secret-key: itcas
+    user-ttl: 7200000
+    user-token-name: authentication
+  alioss:
+    endpoint:  ${sky.alioss.endpoint}
+    access-key: ${sky.alioss.access-key}
+    secret-key: ${sky.alioss.secret-key}
+    bucket-name: ${sky.alioss.bucket}
+  wechat:
+    appid: wx90cd5dadd01bf97a
+    secret: 076927c16dce92288726bba0c74f8f63
+    mchid: 1561414331
+    mchSerialNo: 4B3B3DC35414AD50B1B755BAF8DE9CC7CF407606
+    privateKeyFilePath: D:\pay\apicclient_key.pem
+    apiV3Key: CZBK51236435wxpay435434323FFFDuv3
+    weChatPayCertFilePath: D:\pay\wechatpay_166D96F876F45C7D07CE98952A96EC980368ACFC.pem
+    notifyUrl: https://784ce326.r79.cpolar.top/notify/paySuccess
+    refundNotifyUrl: https://784ce326.r79.cpolar.top/notify/refundSuccess
+    mockEnabled: true
+  shop:
+    address: 黑龙江省齐齐哈尔市拜泉县阳光嘉园一期
+  baidu:
+    ak: 5Cm30Xj6CUAZk1zeUtqFhlO1D7LVyJWY
